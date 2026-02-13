@@ -1,33 +1,33 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "1.0.18"
+  version "1.0.19"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.18/boltDB-v1.0.18-darwin-arm64"
-      sha256 "c0499e4663382730967359cdc36115a8092b0b00458e79fe492aee133e8d34a7"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.19/boltDB-v1.0.19-darwin-arm64"
+      sha256 "e3b379399e5abd6dd5d80575a7791b94ca346c248e494217da85c0e911c5a3ec"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.18/boltDB-v1.0.18-darwin-amd64"
-      sha256 "2397fcb228980c9277adb8ac19c8efe1e8784b2e707271b51a4ea1e7435f77e5"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.19/boltDB-v1.0.19-darwin-amd64"
+      sha256 "c08130eb968a78d75077e79b69317ca0f7fa4a9a3c9a757b562af1ec709c9a2a"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.18/boltDB-v1.0.18-linux-arm64"
-      sha256 "b7a1e0ae266c4a2f34594be56d50fac6a8b13dabba4573f4625abfb1315306c6"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.19/boltDB-v1.0.19-linux-arm64"
+      sha256 "a979c721fbbf349146ada27c5aedb6af042c09b92ed8ef6cf34696120a68aca3"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.18/boltDB-v1.0.18-linux-amd64"
-      sha256 "95db82c44e464becf380ae2cfb7da944bc5b8d6477e539131192d217d3a9dfdd"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.19/boltDB-v1.0.19-linux-amd64"
+      sha256 "a47fb802d3f8b199603415874421ab9d4a68e742e2f322cc9ce851e08b249544"
     end
   end
 
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-#{version}-#{os}-#{arch}" => "boltdb"
+    bin.install "boltDB-v1.0.19-#{os}-#{arch}" => "boltdb"
   end
 
   test do
