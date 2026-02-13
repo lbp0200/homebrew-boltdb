@@ -1,13 +1,13 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "1.0.2"
+  version "1.0.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-darwin-arm64"
-      sha256 "REPLACE_WITH_ACTUAL_SHA256"
+      sha256 "c47e8060aec67d8bb6f9abe15ceed01adc5e1535a797b4e6fcbc3d33ed8d875f"
     else
       url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-darwin-amd64"
       sha256 "REPLACE_WITH_ACTUAL_SHA256"
