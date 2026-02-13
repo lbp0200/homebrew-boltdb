@@ -6,21 +6,21 @@ class Boltdb < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-darwin-arm64"
-      sha256 "c47e8060aec67d8bb6f9abe15ceed01adc5e1535a797b4e6fcbc3d33ed8d875f"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.0/boltDB-1.0.0-darwin-arm64"
+      sha256 ""
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-darwin-amd64"
-      sha256 "REPLACE_WITH_ACTUAL_SHA256"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.0/boltDB-1.0.0-darwin-amd64"
+      sha256 ""
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-linux-arm64"
-      sha256 "REPLACE_WITH_ACTUAL_SHA256"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.0/boltDB-1.0.0-linux-arm64"
+      sha256 ""
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.2/boltDB-1.0.2-linux-amd64"
-      sha256 "REPLACE_WITH_ACTUAL_SHA256"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.0/boltDB-1.0.0-linux-amd64"
+      sha256 ""
     end
   end
 
