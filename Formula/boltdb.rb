@@ -1,41 +1,41 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "1.0.20"
+  version "1.0.21"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.20/boltDB-v1.0.20-darwin-arm64"
-      sha256 "d01d45b2fcbbad3ec31f1a37bc114e0acefbedad12ef765338707bd6f79122a4"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.21/boltDB-v1.0.21-darwin-arm64"
+      sha256 "9c30bf6363e951e438b9824099138ef6d59e294ef4b1085191494a25b8c35a59"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.20/boltDB-v1.0.20-darwin-amd64"
-      sha256 "cabc18b313fefbfa6ffe2d96e66503b5c511d0d10c3ec05d10373feaec8446ad"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.21/boltDB-v1.0.21-darwin-amd64"
+      sha256 "0a4274c48d447806ab4087246317fdf61879474fd3642cf86008d93bfc69bba2"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.20/boltDB-v1.0.20-linux-arm64"
-      sha256 "ee093eae9ff442e88ed12920b18f3569880c7176cd3b9fe61c7f07da5283420f"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.21/boltDB-v1.0.21-linux-arm64"
+      sha256 "c609d96d1f271cce88a305ba69a3ee548126421f813ccc2a87e21249447f20f6"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.20/boltDB-v1.0.20-linux-amd64"
-      sha256 "3acaba308324aa3bbcc4a7f63f73d3ab5d7a4ba490a1955677592b8b0d429a91"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.21/boltDB-v1.0.21-linux-amd64"
+      sha256 "8b15431e9c39f433de56d3b6b7953b6a5adf7588fe3aaee0504bd07358fe6990"
     end
   end
 
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-v1.0.20-#{os}-#{arch}" => "boltdb"
+    bin.install "boltDB-v1.0.21-#{os}-#{arch}" => "boltdb"
   end
 
   service do
     run opt_bin/"boltdb"
     keep_alive true
-    run_args << "-dir" << "var/lib/boltdb"
-    log_path "var/log/boltdb.log"
-    error_log_path "var/log/boltdb.err.log"
+    run_args ["-dir", "#{var}/lib/boltdb"]
+    log_path "#{var}/log/boltdb.log"
+    error_log_path "#{var}/log/boltdb.err.log"
   end
 
   test do
