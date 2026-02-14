@@ -1,39 +1,39 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "1.0.22"
+  version "1.0.23"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.22/boltDB-v1.0.22-darwin-arm64"
-      sha256 "e00e8f0fd81e1e757aa90e700a7e3f3a83f2b8d7e1ee494424eb3449a80c412c"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.23/boltDB-v1.0.23-darwin-arm64"
+      sha256 "e0422a6f30b96d5a429c43aeefdb6b49a3a8432778e7b86adcdd6c51c41c9747"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.22/boltDB-v1.0.22-darwin-amd64"
-      sha256 "cd0781e9569aae88487bf133d5d270698877fa2b1f1dc97a532f8b264ac1259e"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.23/boltDB-v1.0.23-darwin-amd64"
+      sha256 "8a76e045a00d0f5e2f7cb6d01d50431765871f773b9458433649ee4d3d438bf3"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.22/boltDB-v1.0.22-linux-arm64"
-      sha256 "8631df16dd0dd0c9845d210807e9fa63077d47e632f0562b5661548e6d1baaf0"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.23/boltDB-v1.0.23-linux-arm64"
+      sha256 "0ed1d86c71a22c90729b59944eb2307dfa512caac17dc78f706f89226e9d2e97"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.22/boltDB-v1.0.22-linux-amd64"
-      sha256 "474b8e493b7a326f3f28a365273dedc05e3ef1ecebf62c723279854806c00a26"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.23/boltDB-v1.0.23-linux-amd64"
+      sha256 "b4fc13c4dd9aed8b10348bc35d9cb30a9d92662d208430584a1732c43659ab77"
     end
   end
 
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-v1.0.22-#{os}-#{arch}" => "boltdb"
+    bin.install "boltDB-v1.0.23-#{os}-#{arch}" => "boltdb"
   end
 
   service do
     run bin/"boltdb"
     keep_alive true
-    working_dir /var/lib/boltdb
+    working_dir "/var/lib/boltdb"
   end
 
   test do
