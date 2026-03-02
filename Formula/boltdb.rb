@@ -31,17 +31,14 @@ class Boltdb < Formula
   end
 
   service do
-    run [bin/"boltdb", "-dir", data_dir]
-    keep_alive true
-    working_dir data_dir
-  end
-
-  def data_dir
     if OS.mac?
-      "#{ENV["HOME"]}/Library/Application Support/boltdb"
+      dir = "#{ENV["HOME"]}/Library/Application Support/boltdb"
     else
-      "/var/lib/boltdb"
+      dir = "/var/lib/boltdb"
     end
+    run [bin/"boltdb", "-dir", dir]
+    keep_alive true
+    working_dir dir
   end
 
   test do
