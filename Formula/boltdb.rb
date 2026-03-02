@@ -7,20 +7,20 @@ class Boltdb < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.1/boltDB-v8.0.1-darwin-arm64"
-      sha256 "9f8d2b05b365b11c07555c411958a9adc44698c23f5839800f12c6c330fff4db"
+      sha256 "f420ffe17a5989e725724d835f5489396c84a9a756ebe604d7fa4d0f1c56c4c1"
     else
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.1/boltDB-v8.0.1-darwin-amd64"
-      sha256 "48fa6ab61023a36017783cb99979acc343518c56a24f1199bbc8a0735aab77a3"
+      sha256 "59db628da34b57e0bf2eb2fce986c265dc0e5862dc37867e773b365a5108c7d6"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.1/boltDB-v8.0.1-linux-arm64"
-      sha256 "6ea7dbd58670c75f0613fd875f3f3a9f4cceb261b88cde5b9e1a5854cf6e01e9"
+      sha256 "439a970e725bc0e02bac0fda120be1091a0b66ab72699264ff4d618035f6afe0"
     else
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.1/boltDB-v8.0.1-linux-amd64"
-      sha256 "804b2f80627b1707f1f4b1c8c7061c42b1e1404ef58f6c0c2659ff45434374ec"
+      sha256 "3cde1599c644a87ed2e662f84c8a9a3a47a267003064406ca28ef646cc8d8b03"
     end
   end
 
