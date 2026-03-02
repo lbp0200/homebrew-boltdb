@@ -28,17 +28,20 @@ class Boltdb < Formula
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
     bin.install "boltDB-1.0.27--" => "boltdb"
-    (bin/"boltdb-run").write <<~EOS
-      #!/bin/bash
-      exec "#{bin}/boltdb" -dir /var/lib/boltdb -addr 0.0.0.0:6379
-    EOS
-    chmod "+x", bin/"boltdb-run"
   end
 
   service do
-    run bin/"boltdb-run"
+    run ["#{bin}/boltdb", "-dir", data_dir]
     keep_alive true
-    working_dir "/var/lib/boltdb"
+    working_dir data_dir
+  end
+
+  def data_dir
+    if OS.mac?
+      "#{ENV["HOME"]}/Library/Application Support/boltdb"
+    else
+      "/var/lib/boltdb"
+    end
   end
 
   test do
