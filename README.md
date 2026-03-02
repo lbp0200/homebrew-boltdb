@@ -17,11 +17,37 @@ brew install boltdb
 ## Usage
 
 ```bash
-# Start BoltDB
-boltdb --dir=/usr/local/var/boltdb
+# Start BoltDB (uses platform-specific data directory)
+boltdb
 
 # Or with custom options
-boltdb --addr=:6380 --dir=/usr/local/var/boltdb --log-level info
+boltdb --addr=:6337 --dir=/path/to/data --log-level info
+```
+
+### Data Directory
+
+BoltDB uses platform-specific default data directories:
+
+- **macOS**: `~/Library/Application Support/boltdb`
+- **Linux**: `/var/lib/boltdb`
+
+You can also specify a custom directory with the `--dir` flag.
+
+### Running as a Service
+
+```bash
+# Start BoltDB as a background service (macOS)
+brew services start lbp0200/boltdb/boltdb
+
+# Check service status
+brew services list
+
+# Stop the service
+brew services stop lbp0200/boltdb/boltdb
+
+# Or on Linux (using systemd)
+sudo systemctl start boltdb
+sudo systemctl stop boltdb
 ```
 
 ## Upgrading
@@ -48,8 +74,8 @@ brew untap lbp0200/boltdb
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--dir` | Data directory | `./data` |
-| `--addr` | Listen address | `:6379` |
+| `--dir` | Data directory | `~/Library/Application Support/boltdb` (macOS) or `/var/lib/boltdb` (Linux) |
+| `--addr` | Listen address | `:6337` |
 | `--log-level` | Log level | `warning` |
 | `--cluster` | Enable cluster mode | `false` |
 
