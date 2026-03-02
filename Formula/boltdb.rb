@@ -1,47 +1,44 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "1.0.27"
+  version "8.0.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.27/boltDB-v1.0.27-darwin-arm64"
-      sha256 "b0f8e22d525c6d8f95b1fdb839ea7504d70d1363a61fbcc5dc446142850c45ac"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.0/boltDB-v8.0.0-darwin-arm64"
+      sha256 "de163d02ec37e869c9fb224b2fdc326392ae4b55b45b33e98068eaa05c4c925e"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.27/boltDB-v1.0.27-darwin-amd64"
-      sha256 "f7862d1490f7270ff6a5ccf0c25f177716abe84361215ae9938d3374c9406695"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.0/boltDB-v8.0.0-darwin-amd64"
+      sha256 "ff85b41b18dcd660b71aba644ad89c94d4dd727b0e0147853a074a8be44df867"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.27/boltDB-v1.0.27-linux-arm64"
-      sha256 "1fcc27df20844b619f71169daf7ddcc6fc90b2cf2307ebc4578e1b8fc4f6652e"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.0/boltDB-v8.0.0-linux-arm64"
+      sha256 "cbc0bb83fa2c3dd32221de5a0ded4a691e1547763919f2da2ab8b0c4fea926e6"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v1.0.27/boltDB-v1.0.27-linux-amd64"
-      sha256 "570fbe344a71cb79bc64fc52004b4aaf2af90f729ab8595472523fad86a4e7de"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.0/boltDB-v8.0.0-linux-amd64"
+      sha256 "602ec9bedf3723d242274e1aadc9f83da7821bb80920fcaa296c6964587fc73f"
     end
   end
 
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-1.0.27--" => "boltdb"
+    bin.install "boltDB-8.0.0--" => "boltdb"
+    (bin/"boltdb-run").write <<~EOS
+      #!/bin/bash
+      exec "#{bin}/boltdb" -dir /var/lib/boltdb -addr 0.0.0.0:6379
+    EOS
+    chmod "+x", bin/"boltdb-run"
   end
 
   service do
-    run ["#{bin}/boltdb", "-dir", data_dir]
+    run bin/"boltdb-run"
     keep_alive true
-    working_dir data_dir
-  end
-
-  def data_dir
-    if OS.mac?
-      "#{ENV["HOME"]}/Library/Application Support/boltdb"
-    else
-      "/var/lib/boltdb"
-    end
+    working_dir "/var/lib/boltdb"
   end
 
   test do
