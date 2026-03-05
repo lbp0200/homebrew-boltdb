@@ -7,30 +7,30 @@ class Boltdb < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.2/boltDB-v8.0.2-darwin-arm64"
-      sha256 "81024f3bd6b12867a043297412efb7487a68ac13b4cc155db68683cc44e7a718"
+      sha256 "43f0f612d903c469a54ce03bb203b0114eb1a3f7d0a848944fe33413c0fbfc46"
     else
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.2/boltDB-v8.0.2-darwin-amd64"
-      sha256 "ca21cd8b29da3b6a54d3b4f25a1b703c1d5cfeed080c9e9f766f02e7c05391cb"
+      sha256 "a4c4d04a2e40b7f942608e4aa149fd6e9cc66d375fa0e448b1475beb3fcaff13"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.2/boltDB-v8.0.2-linux-arm64"
-      sha256 "829d8c1ef8dc0800e2eba3141cc350140fdb4fb3ed452c7cadf6f242e76866fb"
+      sha256 "8a8887b804aafd0c89e98f6fa0a6166842a06b0907fb672edc3936ce592ca51d"
     else
       url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.2/boltDB-v8.0.2-linux-amd64"
-      sha256 "951cf33b8d396b861e31d52f4b80f7f95923dfffc513bea45a4fe35c3b17b13f"
+      sha256 "e0feeddfa5f78e713339b000c5fec3653757e43b57b349864e023c94d02dc74b"
     end
   end
 
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-v8.0.2-#{os}-#{arch}" => "boltdb"
+    bin.install "boltDB-#{version}-#{os}-#{arch}" => "boltdb"
     (bin/"boltdb-run").write <<~EOS
       #!/bin/bash
-      exec "#{bin}/boltdb" -dir /var/lib/boltdb -addr 0.0.0.0:6379
+      exec "#{bin}/boltdb" -dir <%= OS.mac? ? "#{ENV["HOME"]}/Library/Application Support/boltdb" : "#{ENV["HOME"]}/.local/share/boltdb" %> -skip-startup-cleanup
     EOS
     chmod "+x", bin/"boltdb-run"
   end
@@ -38,7 +38,7 @@ class Boltdb < Formula
   service do
     run bin/"boltdb-run"
     keep_alive true
-    working_dir "/var/lib/boltdb"
+    working_dir <%= OS.mac? ? "#{ENV["HOME"]}/Library/Application Support/boltdb" : "#{ENV["HOME"]}/.local/share/boltdb" %>
   end
 
   test do
