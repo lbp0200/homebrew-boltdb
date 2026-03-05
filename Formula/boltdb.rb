@@ -27,7 +27,7 @@ class Boltdb < Formula
   def install
     arch = Hardware::CPU.arm? ? "arm64" : "amd64"
     os = OS.mac? ? "darwin" : "linux"
-    bin.install "boltDB-8.0.2--" => "boltdb"
+    bin.install "boltDB-v8.0.2-#{os}-#{arch}" => "boltdb"
     (bin/"boltdb-run").write <<~EOS
       #!/bin/bash
       exec "#{bin}/boltdb" -dir /var/lib/boltdb -addr 0.0.0.0:6379
