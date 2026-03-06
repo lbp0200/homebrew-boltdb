@@ -1,26 +1,26 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "8.0.3"
+  version "8.0.4"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.3/boltDB-v8.0.3-darwin-arm64"
-      sha256 "748ec2d9a7783111a867083d786906c02e03497eed049e7b06afedafafd1d199"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.4/boltDB-v8.0.4-darwin-arm64"
+      sha256 "a53015e07a644f2d124d2d1c7ee02fd820a10f79b679889dd6ddf5eed49fa4a3"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.3/boltDB-v8.0.3-darwin-amd64"
-      sha256 "13f713a671ce426408273b457691d0f3a5e2e3f24540f5c2b37985420feb8fd0"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.4/boltDB-v8.0.4-darwin-amd64"
+      sha256 "98892b3e9e5998c9cf380112a04031339e6fe5dd685d397dba6ee1294593846c"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.3/boltDB-v8.0.3-linux-arm64"
-      sha256 "21094c1007bb547bf388621b3b8fee82fe2687cf34394a55b8c02c16df9dcb7e"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.4/boltDB-v8.0.4-linux-arm64"
+      sha256 "bd50b7a329708ed9e8363658f8f1ee8d0d5fe22269cfd499bb46af7d44ab8158"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.3/boltDB-v8.0.3-linux-amd64"
-      sha256 "9deff5c5b987bf52a485c1376ddb794659244c8eb7ef05980b37bbc1ebf0de35"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.0.4/boltDB-v8.0.4-linux-amd64"
+      sha256 "b4d0ce2fe1431c400873496443553da397ced3f102f4ab1af9ce0483d5bbe695"
     end
   end
 
@@ -30,7 +30,7 @@ class Boltdb < Formula
     bin.install "boltDB-#{version}-#{os}-#{arch}" => "boltdb"
     (bin/"boltdb-run").write <<~EOS
       #!/bin/bash
-      exec "#{bin}/boltdb" -dir <%= OS.mac? ? "#{ENV["HOME"]}/Library/Application Support/boltdb" : "#{ENV["HOME"]}/.local/share/boltdb" %> -skip-startup-cleanup
+      exec "#{bin}/boltdb" -dir <%= OS.mac? ? '#{ENV["HOME"]}/Library/Application Support/boltdb' : '#{ENV["HOME"]}/.local/share/boltdb' %> -skip-startup-cleanup
     EOS
     chmod "+x", bin/"boltdb-run"
   end
@@ -38,7 +38,7 @@ class Boltdb < Formula
   service do
     run bin/"boltdb-run"
     keep_alive true
-    working_dir <%= OS.mac? ? "#{ENV["HOME"]}/Library/Application Support/boltdb" : "#{ENV["HOME"]}/.local/share/boltdb" %>
+    working_dir <%= OS.mac? ? '#{ENV["HOME"]}/Library/Application Support/boltdb' : '#{ENV["HOME"]}/.local/share/boltdb' %>
   end
 
   test do
