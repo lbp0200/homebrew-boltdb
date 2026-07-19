@@ -1,26 +1,26 @@
 class Boltdb < Formula
   desc "Redis-compatible key-value database with 100TB storage"
   homepage "https://github.com/lbp0200/BoltDB"
-  version "8.38.0"
+  version "8.38.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.0/boltDB-v8.38.0-darwin-arm64"
-      sha256 "7a62f37b41a1e392fcc334aad61fb6fb2f4bbf580ac55d7477b0b9cb104de815"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.1/boltDB-v8.38.1-darwin-arm64"
+      sha256 "573292a2a96106b27e3a773c7b2af0c3f4d1d6cd0057497c8dd24ac3905a721f"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.0/boltDB-v8.38.0-darwin-amd64"
-      sha256 "a86793c1f0e2823eb2ac262497f94dc5af6dea98e441ea9cda972f9c2fbf4c7f"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.1/boltDB-v8.38.1-darwin-amd64"
+      sha256 "f7b87da66a88da7234c72f4f0de306427c124a1c2b56b1f7d6f9f6f1590a43dc"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.0/boltDB-v8.38.0-linux-arm64"
-      sha256 "cbbdc77dc2d6eec957a99443416e7115738d18a25e1ec6e756029abe0d35b89b"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.1/boltDB-v8.38.1-linux-arm64"
+      sha256 "f486d121ee292418638425ed7b9592cc692737433b7163821b82dd2dff88641d"
     else
-      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.0/boltDB-v8.38.0-linux-amd64"
-      sha256 "a4f26c6f9f91d7981e33f9998ff00b603ca9099fdcfd9fbc7bf9d103a8d61898"
+      url "https://github.com/lbp0200/BoltDB/releases/download/v8.38.1/boltDB-v8.38.1-linux-amd64"
+      sha256 "208c4358c338d996cc4bb0a5cb7a1219aee1eb760ca2a2c583f0928d34722a50"
     end
   end
 
